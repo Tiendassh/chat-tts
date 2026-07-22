@@ -46,7 +46,7 @@ async function startServer() {
       contents.push({ role: 'user', parts: [{ text: message }] });
 
       const response = await aiClient.models.generateContent({
-        model: "gemini-2.5-flash",
+        model: "gemini-2.0-flash",
         contents: contents,
       });
 
