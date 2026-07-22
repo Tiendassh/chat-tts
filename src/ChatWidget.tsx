@@ -12,8 +12,9 @@ export default function ChatWidget() {
   const [isLoading, setIsLoading] = useState(false);
   const [isAudioLoading, setIsAudioLoading] = useState<string | null>(null);
   const [autoPlayAudio, setAutoPlayAudio] = useState(true);
+  const [language, setLanguage] = useState('es-ES');
   const messagesEndRef = useRef<HTMLDivElement>(null);
-  const { isListening, transcript, startListening, stopListening, isSupported, resetTranscript } = useSpeechRecognition();
+  const { isListening, transcript, startListening, stopListening, isSupported, resetTranscript } = useSpeechRecognition(language);
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -76,7 +77,8 @@ export default function ChatWidget() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           message: userMessage.text,
-          history: messages.map(m => ({ role: m.role, text: m.text }))
+          history: messages.map(m => ({ role: m.role, text: m.text })),
+          language: language
         })
       });
 
@@ -121,7 +123,21 @@ export default function ChatWidget() {
   return (
     <div className="flex flex-col h-full w-full">
       {/* Header controls */}
-      <div className="absolute top-4 right-8 z-10">
+      <div className="absolute top-4 right-8 z-10 flex items-center gap-3">
+        <select
+          value={language}
+          onChange={(e) => setLanguage(e.target.value)}
+          className="bg-transparent border rounded-full px-3 py-1.5 text-xs outline-none cursor-pointer"
+          style={{
+            borderColor: 'var(--border)',
+            color: 'var(--text-dim)',
+          }}
+        >
+          <option value="es-ES" style={{ background: 'var(--bg)' }}>Español</option>
+          <option value="en-US" style={{ background: 'var(--bg)' }}>English</option>
+          <option value="pt-BR" style={{ background: 'var(--bg)' }}>Português</option>
+          <option value="fr-FR" style={{ background: 'var(--bg)' }}>Français</option>
+        </select>
         <button 
           onClick={() => setAutoPlayAudio(!autoPlayAudio)}
           className="flex items-center gap-2 px-3 py-1.5 rounded-full text-xs transition-colors border"

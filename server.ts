@@ -36,7 +36,7 @@ async function startServer() {
   // API Routes
   app.post("/api/chat", async (req, res) => {
     try {
-      const { message, history = [] } = req.body;
+      const { message, history = [], language = 'es-ES' } = req.body;
       const aiClient = getAI();
 
       const contents = history.map((msg: any) => ({
@@ -48,6 +48,9 @@ async function startServer() {
       const response = await aiClient.models.generateContent({
         model: "gemini-3.6-flash",
         contents: contents,
+        config: {
+          systemInstruction: `You are a voice assistant. Please respond in the language corresponding to the locale code: ${language}. Keep your answers concise as they will be spoken via TTS.`,
+        }
       });
 
       res.json({ response: response.text });

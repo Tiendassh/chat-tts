@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from 'react';
 
-export function useSpeechRecognition() {
+export function useSpeechRecognition(language: string = 'es-ES') {
   const [isListening, setIsListening] = useState(false);
   const [transcript, setTranscript] = useState('');
   const [recognition, setRecognition] = useState<any>(null);
@@ -12,7 +12,7 @@ export function useSpeechRecognition() {
         const rec = new SpeechRecognition();
         rec.continuous = false;
         rec.interimResults = true;
-        rec.lang = 'es-ES'; // Defaulting to Spanish per the user's prompt language
+        rec.lang = language;
         
         rec.onresult = (event: any) => {
           let currentTranscript = '';
@@ -36,7 +36,7 @@ export function useSpeechRecognition() {
         console.warn('Speech recognition not supported in this browser.');
       }
     }
-  }, []);
+  }, [language]);
 
   const startListening = useCallback(() => {
     if (recognition) {
