@@ -1,0 +1,89 @@
+@import "tailwindcss";
+
+:root {
+  --bg: #050505;
+  --card: #121212;
+  --accent: #c0a080;
+  --border: rgba(255,255,255,0.1);
+  --text-dim: rgba(255,255,255,0.6);
+  --f-serif: 'Georgia', serif;
+  --f-sans: 'Helvetica Neue', Arial, sans-serif;
+}
+
+body, html {
+  background-color: var(--bg);
+  color: #ffffff;
+  font-family: var(--f-sans);
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  height: 100%;
+}
+
+#root {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Custom action button styles from design */
+.action-btn {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: 1px solid var(--accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: var(--accent);
+  transition: all 0.3s;
+}
+
+.action-btn:not(:disabled):hover {
+  background: var(--accent);
+  color: var(--bg);
+}
+
+.action-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.action-btn-primary {
+  background: var(--accent);
+  color: var(--bg);
+}
+
+.action-btn-primary:not(:disabled):hover {
+  filter: brightness(1.1);
+}
+
+.voice-wave {
+  height: 20px;
+  display: flex;
+  align-items: center;
+  gap: 3px;
+}
+
+.wave-bar {
+  width: 2px;
+  background: var(--accent);
+  border-radius: 2px;
+}
+
+/* Scrollbar customization for dark theme */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(255,255,255,0.1);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255,255,255,0.2);
+}

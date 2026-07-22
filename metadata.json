@@ -1,0 +1,6 @@
+{
+  "name": "AI Voice Chat Widget",
+  "description": "A voice and text chat application with TTS integration using Hugging Face, designed to be embeddable in any webpage.",
+  "requestFramePermissions": ["microphone"],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
